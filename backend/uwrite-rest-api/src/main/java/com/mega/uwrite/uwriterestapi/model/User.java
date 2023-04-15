@@ -17,11 +17,11 @@ import java.util.List;
 @EqualsAndHashCode
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "us_fid", referencedColumnName = "id")
-    private List<Story> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Story> stories = new ArrayList<>();
 }

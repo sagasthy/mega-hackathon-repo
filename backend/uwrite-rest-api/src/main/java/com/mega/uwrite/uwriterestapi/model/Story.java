@@ -1,12 +1,7 @@
 package com.mega.uwrite.uwriterestapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.sql.Timestamp;
 
@@ -16,9 +11,13 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
 public class Story {
     @Id
     private Long id;
     private byte[] storyContent;
     private Timestamp publishedDate;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
