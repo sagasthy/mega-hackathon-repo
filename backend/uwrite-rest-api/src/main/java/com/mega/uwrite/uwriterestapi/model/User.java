@@ -15,8 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class User {
+public class User
+{
     @Id
+    @GeneratedValue
     private Long id;
     private String firstName;
     private String lastName;
