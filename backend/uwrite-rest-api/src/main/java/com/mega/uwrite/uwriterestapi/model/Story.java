@@ -14,10 +14,8 @@ import java.sql.Timestamp;
 @Builder
 public class Story {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private byte[] storyContent;
+    private String storyContent;
     private Timestamp publishedDate;
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 }
