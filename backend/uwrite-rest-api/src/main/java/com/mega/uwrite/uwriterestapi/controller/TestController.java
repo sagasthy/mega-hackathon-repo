@@ -11,11 +11,13 @@ import java.util.List;
 @RequestMapping("/test")
 public class TestController {
 
+    private final String SESSION_COOKIE_TAG = "SESSION_COOKIE";
+
     @GetMapping("/protected")
     public String protectedEndpoint(HttpServletRequest request)
     {
-        List<String> notes = (List<String>) request.getSession().getAttribute("NOTES_SESSION");
-        System.out.println(notes.size());
-        return "HAS ACCESS";
+        String sessionID = (String) request.getSession().getAttribute(SESSION_COOKIE_TAG);
+        System.out.println(sessionID);
+        return "CHECK BACKEND LOGS";
     }
 }

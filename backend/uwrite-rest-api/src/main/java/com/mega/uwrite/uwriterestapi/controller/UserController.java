@@ -1,19 +1,15 @@
 package com.mega.uwrite.uwriterestapi.controller;
 
-import com.mega.uwrite.uwriterestapi.dto.RegisterUser;
+import com.mega.uwrite.uwriterestapi.dto.UserLogin;
+import com.mega.uwrite.uwriterestapi.dto.UserRegister;
 import com.mega.uwrite.uwriterestapi.model.User;
 import com.mega.uwrite.uwriterestapi.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,9 +19,11 @@ public class UserController
     @Autowired
     private UserRepository userRepository;
 
+    private final String SESSION_COOKIE_TAG = "SESSION_COOKIE";
+
     @PostMapping("/register")
     @ResponseBody
-    public String registerUser(@RequestBody RegisterUser newUser)
+    public String registerUser(@RequestBody UserRegister newUser)
     {
         User createUser = new User();
         createUser.setEmail(newUser.getEmail());
@@ -44,35 +42,25 @@ public class UserController
         return userRepository.findAll();
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     @ResponseBody
-    public String loginuser(Model model, HttpSession session)
+    public String loginUser(Model model, HttpSession session, @RequestBody UserLogin loginCredentials)
     {
-        List<String> notes = (List<String>) session.getAttribute("NOTES_SESSION");
-        model.addAttribute("noteSession", notes != null ? notes : new ArrayList<>());
+        System.out.println((String) session.getAttribute(SESSION_COOKIE_TAG));
 
-        User retrievedUser = userRepository.findUserById(1L);
-        System.out.println("USER IS "+(retrievedUser == null));
-        return "SUCCESS";
-    }
+        User retrievedUser = userRepository.findUserById(Long.parseLong(loginCredentials.getUserId()));
 
-    @GetMapping("/test")
-    @ResponseBody
-    public String tester(HttpServletRequest request)
-    {
-        System.out.println("IN TESTEER");
-        List<String> notes = (List<String>) request.getSession().getAttribute("NOTES_SESSION");
-        if(notes == null)
+        if(retrievedUser != null)
         {
-            System.out.println("IN 1");
-            notes = new ArrayList<>();
-            request.getSession().setAttribute("NOTES_SESSION", notes);
+            String sessionTag = (String) session.getAttribute(SESSION_COOKIE_TAG);
+            if(sessionTag == null)
+            {
+                session.setAttribute(SESSION_COOKIE_TAG, "NEW SESSION TAG");
+                model.addAttribute("sessionId", "");
+            }
         }
 
-        System.out.println("IN 2");
-        notes.add("FJEWO");
-        request.getSession().setAttribute("NOTES_SESSION", notes);
-        return "TRUTH";
+        return "PROCESSED";
     }
 }
 
