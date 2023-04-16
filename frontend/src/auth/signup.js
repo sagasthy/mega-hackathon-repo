@@ -18,12 +18,6 @@ function SignupPage() {
       lastName:lastname,
       email: email,
       password: password
-    },
-    {
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json'
-      }
     })
     .then((response) => {
       console.log(response.data);

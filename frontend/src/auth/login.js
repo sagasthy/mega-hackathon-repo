@@ -12,12 +12,6 @@ function LoginPage() {
     // TODO: Add login logic here
     axios.post("http://localhost:8081/user/login", {
       userId: email      
-    },
-    {
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json'
-      }
     })
     .then((response) => {
       console.log(response.data);
