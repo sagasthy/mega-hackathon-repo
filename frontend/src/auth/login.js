@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,23 @@ function LoginPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO: Add login logic here
+    axios.post("http://localhost:8081/user/login", {
+      userId: email      
+    },
+    {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      console.log(response.data);
+      // Handle successful signup here
+    })
+    .catch((error) => {
+      console.log(error);
+      // Handle error here
+    });
   };
 
   return (
