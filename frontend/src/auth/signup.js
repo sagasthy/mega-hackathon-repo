@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/SignupPage.css";
+import Logo from '../Logo.png';
 
 function SignupPage() {
   const [firstname, setFirstName] = useState("");
@@ -32,6 +33,20 @@ function SignupPage() {
   };
 
   return (
+    <>
+    <Navbar bg="dark">
+        <Container>
+          <Navbar.Brand href="#home">
+            <img
+              src={Logo}
+              width="120"
+              height="30"
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
+            />
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
     <Container fluid className="signup-background">
       <Row>
         <Col md={{ span: 6, offset: 3 }} className="signup-form">
@@ -87,6 +102,7 @@ function SignupPage() {
         </Col>
       </Row>
     </Container>
+    </>
   );
 }
 
