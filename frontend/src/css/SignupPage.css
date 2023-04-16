@@ -1,0 +1,26 @@
+.signup-background {
+    background-color: #F9FAFB;
+    height: 100vh;
+  }
+  
+  .signup-form {
+    margin-top: 5rem;
+    padding: 3rem;
+    border-radius: 0.25rem;
+    background-color: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-heading {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .signup-label {
+    font-weight: bold;
+  }
+  
+  .signup-button {
+    margin-top: 1rem;
+  }
+  
