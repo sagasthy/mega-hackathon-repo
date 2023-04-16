@@ -1,16 +1,38 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "../css/SignupPage.css";
 
 function SignupPage() {
-  const [name, setName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO: Add signup logic here
+    axios.post("http://localhost:8081/user/register", {
+      firstName: firstname,
+      lastName:lastname,
+      email: email,
+      password: password
+    },
+    {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      console.log(response.data);
+      // Handle successful signup here
+    })
+    .catch((error) => {
+      console.log(error);
+      // Handle error here
+    });
   };
 
   return (
@@ -20,12 +42,22 @@ function SignupPage() {
           <h1 className="signup-heading">Create an Account</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicName">
-              <Form.Label className="signup-label">Name</Form.Label>
+              <Form.Label className="signup-label">First Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter name"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
+                placeholder="Enter First Name"
+                value={firstname}
+                onChange={(event) => setFirstName(event.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicName">
+              <Form.Label className="signup-label">Last Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Last Name"
+                value={lastname}
+                onChange={(event) => setLastName(event.target.value)}
               />
             </Form.Group>
 
