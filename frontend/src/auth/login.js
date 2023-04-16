@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from '../Logo.png';
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,6 +18,7 @@ function LoginPage() {
     .then((response) => {
       console.log(response.data);
       // Handle successful signup here
+      navigate("/user")
     })
     .catch((error) => {
       console.log(error);
