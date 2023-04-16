@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/SignupPage.css";
 
@@ -9,6 +9,7 @@ function SignupPage() {
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ function SignupPage() {
     .then((response) => {
       console.log(response.data);
       // Handle successful signup here
+      navigate("/login")
     })
     .catch((error) => {
       console.log(error);
