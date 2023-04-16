@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "../css/SignupPage.css";
 
 function SignupPage() {
@@ -52,6 +53,9 @@ function SignupPage() {
               Sign Up
             </Button>
           </Form>
+          <div className="text-center mt-3">
+            Already have an account? <Link to="/login">Log In</Link>
+          </div>
         </Col>
       </Row>
     </Container>
