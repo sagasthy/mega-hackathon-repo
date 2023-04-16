@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Logo from '../Logo.png';
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -24,6 +25,20 @@ function LoginPage() {
   };
 
   return (
+    <>
+    <Navbar bg="dark">
+        <Container>
+          <Navbar.Brand href="#home">
+            <img
+              src={Logo}
+              width="120"
+              height="30"
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
+            />
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
     <Container className="bg-light p-5">
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
@@ -59,6 +74,7 @@ function LoginPage() {
         </Col>
       </Row>
     </Container>
+    </>
   );
 }
 

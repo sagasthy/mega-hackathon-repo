@@ -49,7 +49,7 @@ public class UserController
     {
         System.out.println((String) session.getAttribute(SESSION_COOKIE_TAG));
 
-        User retrievedUser = userRepository.findUserById(Long.parseLong(loginCredentials.getUserId()));
+        User retrievedUser = userRepository.findUserByEmail(loginCredentials.getUserId());
 
         if(retrievedUser != null)
         {
