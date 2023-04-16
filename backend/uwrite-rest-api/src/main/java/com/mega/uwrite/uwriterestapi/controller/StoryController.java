@@ -21,6 +21,7 @@ import static com.mega.uwrite.uwriterestapi.controller.UserController.SESSION_CO
 
 @RestController
 @RequestMapping("stories")
+@CrossOrigin
 public class StoryController {
     private final UserRepository userRepository;
     private final StoryRepository storyRepository;
@@ -44,8 +45,9 @@ public class StoryController {
 
     @GetMapping("/get-story/{storyId}")
     public ResponseEntity<Story> getStoryById(HttpSession session, @PathVariable Long storyId) {
-        if(isNotLoggedIn(session))
-            throw new LoginFailureException("User not logged in.");
+        System.out.println("GReger");
+//        if(isNotLoggedIn(session))
+//            throw new LoginFailureException("User not logged in.");
 
         Optional<Story> story = storyRepository.findById(storyId);
 
@@ -55,9 +57,9 @@ public class StoryController {
     }
 
     @PutMapping("/new-story")
-    public ResponseEntity<Story> createStory(HttpSession session, @RequestBody StoryRequest storyRequest) {
-        if(isNotLoggedIn(session))
-            throw new LoginFailureException("User not logged in.");
+    public ResponseEntity<Long> createStory(HttpSession session, @RequestBody StoryRequest storyRequest) {
+//        if(isNotLoggedIn(session))
+//            throw new LoginFailureException("User not logged in.");
 
         Optional<User> user = userRepository.findById(storyRequest.userId());
 
@@ -72,7 +74,7 @@ public class StoryController {
 
         Story savedStory = storyRepository.save(story);
         userRepository.save(foundUser);
-        return ResponseEntity.ok().body(savedStory);
+        return ResponseEntity.ok().body(savedStory.getId());
     }
 
     private boolean isNotLoggedIn(HttpSession httpSession) {

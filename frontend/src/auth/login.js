@@ -1,14 +1,31 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // TODO: Add login logic here
+    
+    console.log("LOGIN REQUEST")
+    let options = {
+      method: "POST",
+      url: "http://localhost:8081/user/login",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json;charset=UTF-8"
+      },
+      data: {
+          "userId": 1,
+      },
+  };
+
+  let response = await axios(options);
+  if(response && response.status === 200)
+      console.log(response.data)
   };
 
   return (
