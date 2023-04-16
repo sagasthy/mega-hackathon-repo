@@ -17,6 +17,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse("NOT_FOUND", ex.getMessage(), LocalDateTime.now().toString());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = { LoginFailureException.class})
+    protected ResponseEntity<ErrorResponse> handleLoginException (
+            RuntimeException ex, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse("UNAUTHORIZED", ex.getMessage(), LocalDateTime.now().toString());
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+    }
 }
 
 record ErrorResponse (String errorCode, String errorDescription, String time) {}

@@ -19,7 +19,7 @@ public class UserController
     @Autowired
     private UserRepository userRepository;
 
-    private final String SESSION_COOKIE_TAG = "SESSION_COOKIE";
+    public static final String SESSION_COOKIE_TAG = "SESSION_COOKIE";
 
     @PostMapping("/register")
     @ResponseBody
