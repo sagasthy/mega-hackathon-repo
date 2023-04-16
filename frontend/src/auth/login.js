@@ -9,23 +9,18 @@ function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    console.log("LOGIN REQUEST")
-    let options = {
-      method: "POST",
-      url: "http://localhost:8081/user/login",
-      headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json;charset=UTF-8"
-      },
-      data: {
-          "userId": 1,
-      },
-  };
-
-  let response = await axios(options);
-  if(response && response.status === 200)
-      console.log(response.data)
+    // TODO: Add login logic here
+    axios.post("http://localhost:8081/user/login", {
+      userId: email      
+    })
+    .then((response) => {
+      console.log(response.data);
+      // Handle successful signup here
+    })
+    .catch((error) => {
+      console.log(error);
+      // Handle error here
+    });
   };
 
   return (
